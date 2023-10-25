@@ -1,4 +1,6 @@
-function getComputerChoice() {
+let playerWins = 0;
+let computerWins = 0;
+  function getComputerChoice() {
   let choices = ["rock", "paper", "scissors"];
   let randomChoice = Math.floor(Math.random() * choices.length);
   return choices[randomChoice];
@@ -12,26 +14,21 @@ function playRound(playerSelection, computerSelection) {
       (playerSelection === "paper" && computerSelection === "rock") ||
       (playerSelection === "scissors" && computerSelection === "paper")
   ) {
-      return "Computer selected " + computerSelection + ". You win!";
+      playerWins++;
+    return "Computer selected " + computerSelection + ". You win!";
   } else {
-      return "Computer selected " + computerSelection + ". You lose!";
+      computerWins++;
+    return "Computer selected " + computerSelection + ". You lose!";
   }
 }
-
+const prompt = require("prompt-sync")();
 function game() {
-  let playerWins = 0;
-  let computerWins = 0;
+  
 
   for (let i = 0; i < 5; i++) {
-      const playerSelection = prompt("Enter rock, paper, or scissors").toLowerCase();
+    const playerSelection = prompt("Enter rock, paper, or scissors").toLowerCase();
       const computerSelection = getComputerChoice();
       const roundWinner = playRound(playerSelection, computerSelection);
-
-      if (roundWinner.includes("You win!")) {
-          playerWins++;
-      } else if (roundWinner.includes("You lose!")) {
-          computerWins++;
-      }
 
       console.log(roundWinner);
   }
